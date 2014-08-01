@@ -1,0 +1,76 @@
+<style>
+    .ulogin_btn {
+        background-image: url(<?php echo $this->getSkinUrl('images/ulogin/panel.png') ?>);
+    }
+</style>
+
+
+<?php
+$str_info['h1'] = $this->__('Социальные сети');
+$str_info['h2'] = $this->__('Мои аккаунты');
+$str_info['str1'] = $this->__("Привязать уккаунт:");
+$str_info['str2'] = $this->__("Привязанные аккаунты:");
+$str_info['about0'] = $this->__("Привяжите ваши аккаунты социальных сетей к личному кабинету для быстрой авторизации.");
+$str_info['about1'] = $this->__("Здесь Вы можете создать привязку к аккаунту, кликнув по значку.");
+$str_info['about2'] = $this->__("Здесь Вы можете удалить привязку к аккаунту, кликнув по значку.");
+
+$current_customer = Mage::getSingleton('customer/session')->getCustomer()->getId();
+
+$networks = Mage::getModel('ulogin/account')->getCollection()
+    ->addFieldToSelect('network')
+    ->addFieldToFilter('userid', $current_customer);
+?>
+
+<div class="dashboard">
+    <div class="page-title">
+        <h1><?php echo $str_info['h1'] ?></h1>
+    </div>
+    <p><?php echo $str_info['about0'] ?></p>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <div class="box-account box-info">
+        <div class="box-head">
+            <h2><?php echo $str_info['h2'] ?></h2>
+        </div>
+
+        <div class="col1-set">
+            <div class="box">
+                <div class="box-title">
+                    <br>
+                    <h3><?php echo$str_info['str1'] ?></h3>
+                </div>
+                <div class="box-content">
+                    <p><?php echo $str_info['about1'] ?></p>
+                    <?php echo $this->getChildHtml('ulogin_form'); ?>
+                    <div style="clear: both"></div>
+                </div>
+                <div class="box-title">
+                    <br>
+                    <h3><?php echo$str_info['str2'] ?></h3>
+                </div>
+                <div class="box-content">
+                    <div id="ulogin_accounts">
+                        <p><?php echo $str_info['about2'] ?></p>
+                        <?php
+                        if (count($networks) > 0){
+                            $networks_list = array();
+                            foreach ($networks as $network_){
+                                $network = $network_->getNetwork();
+                                if (!in_array($network, $networks_list)) {
+                                    $networks_list[] = $network;
+                                    ?>
+                                    <div id="ulogin_<?php echo $network?>" class="ulogin_btn" onclick="uloginDeleteAccount('<?php echo $current_customer ?>', '<?php echo $network ?>')"></div>
+                                <?php
+                                }
+                            }
+                        }
+                        ?>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="buttons-set">
+    <p class="back-link"><a href="<?php echo $this->getUrl('customer/account/') ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+</div>

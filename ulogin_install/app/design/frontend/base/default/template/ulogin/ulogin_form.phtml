@@ -1,0 +1,34 @@
+<?php
+if ($this->isVisible())
+{
+    ?>
+    <div class="ulogin_form">
+        <?php
+        if ($this->getLabel()) {
+            ?>
+            <label for="<?php echo $this->getFormId()?>"><?php echo $this->getLabel()?></label>
+        <?php
+        }
+        ?>
+        <div
+	        id="<?php echo $this->getFormId()?>"
+	        <?php
+			if($this->getUloginId()) {
+				?>
+	            data-uloginid="<?php echo $this->getUloginId()?>"
+			<?php
+			}
+	        echo $this->getDataUlogin();
+	        ?>
+            style="min-height: 40px; clear: both;"></div>
+        <script>
+            uLogin.customInit("<?php echo $this->getFormId()?>")
+        </script>
+    </div>
+
+
+<?php
+    $this->incCountForm();
+    $this->setRedirectLoginAfter();
+}
+?>
