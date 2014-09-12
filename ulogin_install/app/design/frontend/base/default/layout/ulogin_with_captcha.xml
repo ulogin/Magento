@@ -2,7 +2,7 @@
 <layout version="0.1.0">
     <customer_account_login>
         <reference name="customer_form_login">
-            <block type="core/text_list" name="form.additional.info">
+            <reference name="form.additional.info">
                 <block type="ulogin/uloginform" name="ulogin_form" before="-" template="ulogin/ulogin_form.phtml">
                     <reference name="head">
                         <block type="core/text" name="ulogin_ru">
@@ -11,13 +11,13 @@
                         <action method="addItem"><type>skin_js</type><name>js/ulogin/ulogin.js</name></action>
                     </reference>
                 </block>
-            </block>
+            </reference>
         </reference>
     </customer_account_login>
 
     <customer_account_create>
         <reference name="customer_form_register">
-            <block type="core/text_list" name="form.additional.info">
+            <reference name="form.additional.info">
                 <block type="ulogin/uloginform" name="ulogin_form" before="-" template="ulogin/ulogin_form.phtml">
                     <reference name="head">
                         <block type="core/text" name="ulogin_ru">
@@ -26,13 +26,13 @@
                         <action method="addItem"><type>skin_js</type><name>js/ulogin/ulogin.js</name></action>
                     </reference>
                 </block>
-            </block>
+            </reference>
         </reference>
     </customer_account_create>
 
     <customer_account_forgotpassword>
         <reference name="forgotPassword">
-            <block type="core/text_list" name="form.additional.info">
+            <reference name="form.additional.info">
                 <block type="ulogin/uloginform" name="ulogin_form" before="-" template="ulogin/ulogin_form.phtml">
                     <reference name="head">
                         <block type="core/text" name="ulogin_ru">
@@ -41,13 +41,23 @@
                         <action method="addItem"><type>skin_js</type><name>js/ulogin/ulogin.js</name></action>
                     </reference>
                 </block>
-            </block>
+            </reference>
         </reference>
     </customer_account_forgotpassword>
 
     <checkout_onepage_index>
         <reference name="checkout.onepage.login">
             <block type="core/text_list" name="form.additional.info">
+                <block type="captcha/captcha" name="captcha">
+                    <reference name="head">
+                        <action method="addJs"><file>mage/captcha.js</file></action>
+                    </reference>
+                    <action method="setFormId"><formId>user_login</formId></action>
+                    <action method="setImgWidth"><width>230</width></action>
+                    <action method="setImgHeight"><width>50</width></action>
+                </block>
+            </block>
+            <reference name="form.additional.info">
                 <block type="ulogin/uloginform" name="ulogin_form" before="-" template="ulogin/ulogin_form.phtml">
                     <reference name="head">
                         <block type="core/text" name="ulogin_ru">
@@ -56,11 +66,29 @@
                         <action method="addItem"><type>skin_js</type><name>js/ulogin/ulogin.js</name></action>
                     </reference>
                 </block>
-            </block>
+            </reference>
         </reference>
 
         <reference name="checkout.onepage.billing">
             <block type="core/text_list" name="form.additional.info">
+                <block type="captcha/captcha" name="captcha.guest.checkout">
+                    <reference name="head">
+                        <action method="addJs"><file>mage/captcha.js</file></action>
+                    </reference>
+                    <action method="setFormId"><formId>guest_checkout</formId></action>
+                    <action method="setImgWidth"><width>230</width></action>
+                    <action method="setImgHeight"><width>50</width></action>
+                </block>
+                <block type="captcha/captcha" name="captcha.register.during.checkout">
+                    <reference name="head">
+                        <action method="addJs"><file>mage/captcha.js</file></action>
+                    </reference>
+                    <action method="setFormId"><formId>register_during_checkout</formId></action>
+                    <action method="setImgWidth"><width>230</width></action>
+                    <action method="setImgHeight"><width>50</width></action>
+                </block>
+            </block>
+            <reference name="form.additional.info">
                 <block type="ulogin/uloginform" name="ulogin_form" before="-" template="ulogin/ulogin_form.phtml">
                     <reference name="head">
                         <block type="core/text" name="ulogin_ru">
@@ -69,7 +97,7 @@
                         <action method="addItem"><type>skin_js</type><name>js/ulogin/ulogin.js</name></action>
                     </reference>
                 </block>
-            </block>
+            </reference>
         </reference>
     </checkout_onepage_index>
 
