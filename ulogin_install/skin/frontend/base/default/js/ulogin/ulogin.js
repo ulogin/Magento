@@ -65,7 +65,7 @@ function uloginMessage(title, msg, answerType) {
 }
 
 
-function uloginDeleteAccount(user_id, network){
+function uloginDeleteAccount(network){
     jQuery.ajax({
         url: '/ulogin/ajax/deleteaccount/',
         type: 'POST',
@@ -73,7 +73,6 @@ function uloginDeleteAccount(user_id, network){
         cache: false,
         data: {
             delete_account: 'delete_account',
-            user_id: user_id,
             network: network
         },
         success: function (data) {

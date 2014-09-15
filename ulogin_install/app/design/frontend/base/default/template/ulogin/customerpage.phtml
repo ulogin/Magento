@@ -58,7 +58,7 @@ $networks = Mage::getModel('ulogin/account')->getCollection()
                                 if (!in_array($network, $networks_list)) {
                                     $networks_list[] = $network;
                                     ?>
-                                    <div id="ulogin_<?php echo $network?>" class="ulogin_btn" onclick="uloginDeleteAccount('<?php echo $current_customer ?>', '<?php echo $network ?>')"></div>
+                                    <div id="ulogin_<?php echo $network?>" class="ulogin_btn" onclick="uloginDeleteAccount('<?php echo $network ?>')"></div>
                                 <?php
                                 }
                             }
