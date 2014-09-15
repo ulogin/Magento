@@ -515,7 +515,7 @@ class Ulogin_Plugin_AjaxController extends Mage_Core_Controller_Front_Action
             return;
         }
 
-        $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
+        $user_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
         $network = isset($_POST['network']) ? $_POST['network'] : '';
 
 
@@ -533,7 +533,6 @@ class Ulogin_Plugin_AjaxController extends Mage_Core_Controller_Front_Action
                     echo json_encode(array(
                         'title' => $this->__("Аккаунт успешно удалён"),
                         'msg' => $this->__("Удаление аккаунта <b>%s</b> успешно выполнено", $network),
-                        'user' => $user_id,
                         'answerType' => 'ok'
                     ));
                     return;
